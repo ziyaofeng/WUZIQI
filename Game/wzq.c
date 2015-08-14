@@ -10,6 +10,44 @@ extern void alert(char *s,u16 bcolor);
 extern void Get_Click(u16 *x,u16 *y);
 extern void Show_Font(u16 x,u16 y,u8 *font,u8 gbsize,u16 p_color,u16 b_color);
 u8 cbx,cby,pbx,pby;
+u16 ucolor=White,ccolor=Black;
+bit first=0;
+void gamecfg()
+{
+	u16 x,y;
+	LCD_Clear(0x051d);
+	Show_Str(40,0,"人机五子棋",32,White,Nocolor);
+	Show_Str(20,40,"□使用黑色棋子",24,Black,Nocolor);
+	Show_Str(20,70,"□使用白色棋子",24,Black,Nocolor);
+	Show_Str(20,100,"□机器先下子",24,Black,Nocolor);
+	Show_Str(20,130,"□你先下子",24,Black,Nocolor);
+	LCD_DrawBox(20,180,40,20,0xc618);
+	Show_Str(24,182,"确认",16,Black,Nocolor);
+	LCD_DrawEBox(20,180,40,20,Blue);
+	if(ucolor==Black){Show_Str(20,40,"√",24,Black,Nocolor);Show_Str(20,70,"□",24,Black,0x051d);}
+	if(ucolor==White){Show_Str(20,70,"√",24,Black,Nocolor);Show_Str(20,40,"□",24,Black,0x051d);}
+	if(first){Show_Str(20,100,"√",24,Black,Nocolor);Show_Str(20,130,"□",24,Black,0x051d);}
+	else{Show_Str(20,100,"□",24,Black,0x051d);Show_Str(20,130,"√",24,Black,Nocolor);}
+	while(1)
+	{
+		while(PEN);
+		delay_ms(1);
+		if(!PEN)
+		{
+			Get_Click(&x,&y);
+			if((x>20&&x<200)&&(y>40&&y<64)){ucolor=Black;ccolor=White;}
+			if((x>20&&x<200)&&(y>70&&y<94)){ucolor=White;ccolor=Black;}
+			if((x>20&&x<200)&&(y>100&&y<124))first=1;
+			if((x>20&&x<200)&&(y>130&&y<154))first=0;
+			if((x>20&&x<60)&&(y>180&&y<200)) return;
+			if(ucolor==Black){Show_Str(20,40,"√",24,Black,Nocolor);Show_Str(20,70,"□",24,Black,0x051d);}
+			if(ucolor==White){Show_Str(20,70,"√",24,Black,Nocolor);Show_Str(20,40,"□",24,Black,0x051d);}
+			if(first){Show_Str(20,100,"√",24,Black,Nocolor);Show_Str(20,130,"□",24,Black,0x051d);}
+			else{Show_Str(20,100,"□",24,Black,0x051d);Show_Str(20,130,"√",24,Black,Nocolor);}
+		}
+		while(!PEN);
+	}
+}
 void GameInit()
 {
 	u8 x,y;
@@ -17,6 +55,7 @@ void GameInit()
 	{
 		for(x=0;x<=14;x++) qipan[y][x]=0;
 	}
+	if(first)qipan[7][7]=2;
 }
 void Show_QIPAN()
 {
@@ -37,8 +76,8 @@ void Refresh()
 	{
 		for(x=0;x<=14;x++)
 		{
-			if(qipan[y][x]==1) {Show_Font(x*16,y*16+35,"●",16,White,Nocolor);}
-			if(qipan[y][x]==2) {Show_Font(x*16,y*16+35,"●",16,Black,Nocolor);}
+			if(qipan[y][x]==1) {Show_Font(x*16,y*16+35,"●",16,ucolor,Nocolor);}
+			if(qipan[y][x]==2) {Show_Font(x*16,y*16+35,"●",16,ccolor,Nocolor);}
 		}
 	}
 }
@@ -115,7 +154,6 @@ void WZQ()
 	LCD_DrawBox(70,280,40,20,0xc618);
 	Show_Str(74,282,"重来",16,Black,Nocolor);
 	LCD_DrawEBox(70,280,40,20,Blue);
-	qipan[7][7]=2;
 	Refresh();
 	while(1)
 	{
@@ -163,6 +201,10 @@ void main()
 	LCD_Initializtion();
 	font_init();
 	TP_Init();
-	GameInit();
-	WZQ();
+	while(1)
+	{
+		gamecfg();
+		GameInit();
+		WZQ();
+	}
 }

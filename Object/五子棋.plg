@@ -3,34 +3,9 @@
 <pre>
 <h1>礦ision Build Log</h1>
 <h2>Project:</h2>
-E:\GITHUB\wzq\五子棋.uvproj
+E:\GITHUB\wuziqi\五子棋.uvproj
 Project File Date:  08/13/2015
 
 <h2>Output:</h2>
-Build target 'stc12c5a60s2'
-compiling wzq.c...
-Game\wzq.c(147): warning C182: pointer to different objects
-Game\wzq.c(147): warning C182: pointer to different objects
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GUI_TEXT?HX8347D
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_SHOW_PICTURE?HX8347D
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_TP_DRAW_BIG_POINT?TOUCH
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?GUIDSHOW?SYS_APP
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GUIDDO?SYS_APP
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  DESKTOP
-    MODULE:  .\Object\sys_app.obj (SYS_APP)
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  DESKTOP
-    MODULE:  .\Object\sys_app.obj (SYS_APP)
-    ADDRESS: 39A0H
-Program Size: data=9.0 xdata=652 code=20314
-creating hex file from ".\Object\五子棋"...
-".\Object\五子棋" - 0 Error(s), 9 Warning(s).
 Clean started: Project: '五子棋'
    deleting intermediate output files for target 'stc12c5a60s2'
