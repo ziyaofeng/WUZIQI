@@ -156,6 +156,7 @@ void WZQ()
 	LCD_DrawEBox(70,280,40,20,Blue);
 	Refresh();
 	while(1)
+	while(1)
 	{
 		while(PEN);
 		delay_ms(1);
@@ -181,12 +182,12 @@ void WZQ()
 					qipan[y][x]=1;
 					pbx=x;pby=y;
 					Refresh();
-					if(Victory(x,y)){alert("你赢了！",0x051d);win=1;}
+					if(Victory(x,y)){alert("你赢了！",0x051d);Show_Str(40,0,"人机五子棋",32,White,Nocolor);win=1;break;}
 					PCTurn(&x,&y);
 					if(!qipan[y][x])qipan[y][x]=2;
 					cbx=x;cby=y;
 					Refresh();
-					if(Victory(x,y)){alert("你输了！",0x051d);win=1;}
+					if(Victory(x,y)){alert("你输了！",0x051d);Show_Str(40,0,"人机五子棋",32,White,Nocolor);win=1;}
 				}else{
 					alert("棋子已存在",0x051d);
 					Show_Str(40,0,"人机五子棋",32,White,Nocolor);
